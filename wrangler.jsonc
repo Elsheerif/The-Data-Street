@@ -1,0 +1,18 @@
+// Cloudflare Pages configuration for Next.js
+{
+  "name": "data-street",
+  "build": {
+    "command": "npm run build"
+  },
+  "env": {
+    "production": {
+      "compatibility_date": "2026-01-28",
+      "routes": [
+        {
+          "pattern": "/api/*",
+          "zone_name": "data-street.com"
+        }
+      ]
+    }
+  }
+}
