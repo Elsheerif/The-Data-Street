@@ -3,10 +3,11 @@ import { prisma } from '@/lib/prisma';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const memberId = parseInt(params.id);
+    const { id } = await params;
+    const memberId = parseInt(id);
 
     const member = await prisma.member.findUnique({
       where: { id: memberId },
@@ -40,10 +41,11 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const memberId = parseInt(params.id);
+    const { id } = await params;
+    const memberId = parseInt(id);
     const body = await request.json();
 
     const {
@@ -112,10 +114,11 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const memberId = parseInt(params.id);
+    const { id } = await params;
+    const memberId = parseInt(id);
 
     await prisma.member.delete({
       where: { id: memberId },

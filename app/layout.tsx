@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Data Street',
+  title: 'The Data Street',
   description: 'Where Data meets Discovery. Join the next generation of data innovators.',
   icons: {
     icon: '/logo.jpeg',

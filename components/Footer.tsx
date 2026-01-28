@@ -69,8 +69,8 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-2">
                 <Mail size={16} className="text-teal mt-1 flex-shrink-0" />
-                <a href="mailto:info@datastreet.org" className="text-gray-cool hover:text-teal transition-colors">
-                  info@datastreet.org
+                <a href="mailto:Data_Street@outlook.com" className="text-gray-cool hover:text-teal transition-colors">
+                  Data_Street@outlook.com
                 </a>
               </li>
             </ul>
