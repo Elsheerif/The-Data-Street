@@ -1,0 +1,77 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Department {
+  id        Int     @id @default(autoincrement())
+  name      String  @unique
+  description String?
+  members   Member[]
+  committees Committee[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Committee {
+  id        Int     @id @default(autoincrement())
+  name      String  @unique
+  description String?
+  departmentId Int
+  department Department @relation(fields: [departmentId], references: [id])
+  members   Member[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Member {
+  id        Int     @id @default(autoincrement())
+  name      String
+  email     String  @unique
+  phone     String?
+  photoUrl  String?
+  bio       String?
+  roleTitle String?
+  status    String  @default("active")
+  joinDate  DateTime?
+  skills    String[] @default([])
+  socialLinkedIn String?
+  socialGitHub String?
+  departmentId Int?
+  department Department? @relation(fields: [departmentId], references: [id])
+  committeeId Int?
+  committee Committee? @relation(fields: [committeeId], references: [id])
+  projects  ProjectMember[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Project {
+  id        Int     @id @default(autoincrement())
+  name      String  @unique
+  description String?
+  status    String  @default("active")
+  members   ProjectMember[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProjectMember {
+  id        Int     @id @default(autoincrement())
+  memberId  Int
+  member    Member  @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  projectId Int
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  role      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([memberId, projectId])
+}
