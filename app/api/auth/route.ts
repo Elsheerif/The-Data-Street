@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+export const runtime = 'edge';
+
 /**
  * Basic authentication endpoint
  * In production: Use proper session management with secure cookies

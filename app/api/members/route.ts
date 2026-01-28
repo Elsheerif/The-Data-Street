@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { withSecurityHeaders, checkRateLimit, errorResponse, successResponse } from '@/lib/api-security';
 
+export const runtime = 'edge';
+
 export async function GET(request: NextRequest) {
   try {
     // Check rate limit in production
